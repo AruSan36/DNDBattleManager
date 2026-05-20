@@ -6,13 +6,15 @@ public class Entity {
     private int ArmorClass;
     private int HitPoints;
     private int Initiative;
+    private boolean isPlayer;
 
 
-    public Entity(String name, int ArmorClass, int HitPoints, int Initiative) {
+    public Entity(String name, int ArmorClass, int HitPoints, int Initiative, boolean isPlayer) {
         this.name = name;
         this.ArmorClass = ArmorClass;
         this.HitPoints = HitPoints;
         this.Initiative = Initiative;
+        this.isPlayer = isPlayer;
     }
 
     public void updateName(String name) {
@@ -42,6 +44,10 @@ public class Entity {
 
     public void updateInitiative(int Initiative) {
         this.Initiative = Initiative;
+    }
+
+    public void updateIsPlayer(boolean isPlayer) {
+        this.isPlayer = isPlayer;
     }
 
 }
