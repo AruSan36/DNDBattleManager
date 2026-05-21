@@ -1,23 +1,38 @@
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import ui.Screen;
 
 public class App extends Application {
 
+    public static final int WIDTH = 1980;
+    public static final int HEIGHT = 1080;
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
+
     @Override
     public void start(Stage stage) {
-        Screen screen = new Screen();
-        Scene scene = new Scene(screen.getRoot(), 800, 600);
+        
+        Group root = new Group();
+        Scene scene = new Scene(root, Color.BLACK);
+        AssetManager.loadAll();
 
-        stage.setTitle("DND Battle Manager");
+        stage.getIcons().add(AssetManager.assets.get("DNDIcon"));
+        stage.setTitle("DNDbattlemanager");
         stage.setScene(scene);
+        stage.setWidth(WIDTH);
+        stage.setHeight(HEIGHT);
+        stage.setResizable(false);
+        //stage.setX(50);
+        //stage.setY(50);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
     
 }
