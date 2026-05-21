@@ -18,8 +18,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         
-        Group root = new Group();
-        Scene scene = new Scene(root, Color.BLACK);
+        Screen screen = new Screen(WIDTH, HEIGHT);
+        Scene scene = new Scene(screen);
         AssetManager.loadAll();
 
         stage.getIcons().add(AssetManager.assets.get("DNDIcon"));
@@ -29,10 +29,8 @@ public class App extends Application {
         stage.setHeight(HEIGHT);
         stage.setResizable(false);
         //stage.setX(50);
-        //stage.setY(50);
+        //stage.setY(50); 
         stage.show();
     }
-
-    
     
 }

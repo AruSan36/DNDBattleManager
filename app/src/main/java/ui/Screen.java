@@ -1,53 +1,85 @@
 
 package ui;
 
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Screen {
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import ui.Buttons;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
+public class Screen extends Pane{
     
-    private final BorderPane root;
-    private final GridPane grid;
-    private final Button[] boxButtons;
-    private final Button createButton;
-    private final Button deleteButton;
+    private final Canvas canvas;
+    private final List<Buttons> buttons = new ArrayList<>();
+    private float globalX; 
+    private float globalY;
+    private final float offset = 10;
+    /*
+    Layout Plan
+    Create Button, x = 10, y = 10
+    Delete Button, x = createButtonWidth+10, y = 10
 
-    public Screen() {
-        root = new BorderPane();
-        grid = new GridPane();
-        boxButtons = new Button[12];
-        createButton = new Button("Create");
-        deleteButton = new Button("Delete");
+    */
 
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20));
+    public Screen(int WIDTH, int HEIGHT) {
+        this.canvas = new Canvas(WIDTH, HEIGHT);
+        getChildren().add(canvas);
+        setPrefSize(WIDTH, HEIGHT);
 
-        HBox topBar = new HBox(10, createButton, deleteButton);
-        topBar.setPadding(new Insets(20));
 
-        root.setTop(topBar);
-        root.setCenter(grid);
+        initButtons();
+        draw();
     }
 
-    public Parent getRoot() {
-        return root;
+    public Canvas getCanvas(){
+        return getCanvas();
     }
 
-    public Button[] getBoxButtons() {
-        return boxButtons;
+    public void draw(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        //Hintergrund löschen und neu erstellen in Schwarz
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        
+        for(Buttons b : buttons){
+            drawButtons(gc, b);
+        }
+
+    } 
+
+    private void drawButtons(GraphicsContext gc, Buttons b){
+        gc.setFill(Color.BLUE);
+        gc.fillRoundRect(b.x, b.y, b.width, b.height, 5, 5);
+
+        gc.setStroke(Color.WHITE);
+        gc.setLineWidth(2);
+        gc.strokeRoundRect(b.x, b.y, b.width, b.height, 5, 5);
+
+        // Text (grob mittig; für genau mittig müsste man Textbreite messen)
+        gc.setFill(Color.WHITE);
+        gc.fillText(b.text, b.x + 10, b.y + b.height / 2 + 5);
     }
 
-    public Button getCreateButton() {
-        return createButton;
+    private void initButtons(){
+        Buttons b1 = new Buttons(
+            20,20,60,20,
+            "Create",
+            () -> System.out.println("Entry Created")
+        );
+        Buttons b2 = new Buttons(
+            20 + b1.width + offset,20,60,20,
+            "Delete",
+            () -> System.out.println("Entry Deleted")
+        );
+
+        buttons.add(b1);
+        buttons.add(b2);
     }
 
-    public Button getDeleteButton() {
-        return deleteButton;
-    }
+    
 
 }

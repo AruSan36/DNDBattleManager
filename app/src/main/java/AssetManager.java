@@ -1,11 +1,9 @@
 
 import java.util.HashMap;
-import java.util.Map;
 import javafx.scene.image.Image;
-
 public class AssetManager {
 
-    public static final Map<String, Image> assets = new HashMap();
+    public static final HashMap<String, Image> assets = new HashMap<>();
 
     public static void loadAll(){
         load("DNDIcon", "DND-Symbol.png");
