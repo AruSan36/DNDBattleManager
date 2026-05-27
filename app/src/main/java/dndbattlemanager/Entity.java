@@ -1,5 +1,7 @@
 package dndbattlemanager;
 
+import javafx.scene.text.Font;
+
 public class Entity {
 
     private String name;
@@ -8,8 +10,8 @@ public class Entity {
     private int CurrentHitPoints;
     private int Initiative;
     private boolean isPlayer;
-    private float txtFieldWidth;
-    private float txtFieldHeight;
+    private float width;
+    private float height;
     private float startPosX;
     private float startPosY;
     
@@ -56,6 +58,21 @@ public class Entity {
         this.isPlayer = isPlayer;
     }
 
+    public boolean contains(double x, double y){
+        return startPosX < x && startPosX + width > x 
+        && startPosY < y && startPosY + height > y;
+    }
+
+    public static boolean convertTextToisPlayer(String txt){
+        switch(txt){
+            case "ja", "Ja", "yes", "Yes" , "j", "y": return true;
+            case "nein", "Nein" , "no" , "No" , "n": return false;
+            default: return false;
+        }
+    }
+
+    
+
     public String getName() {
         return name;
     }
@@ -81,19 +98,19 @@ public class Entity {
     }
 
     public void setWidth(float w){
-        this.txtFieldWidth = w;
+        this.width = w;
     }
 
     public void setHeight(float h){
-        this.txtFieldHeight = h;
+        this.height = h;
     }
 
-    public float getTxtFieldHeight() {
-        return txtFieldHeight;
+    public float getHeight() {
+        return height;
     }
 
-    public float getTxtFieldWidth() {
-        return txtFieldWidth;
+    public float getWidth() {
+        return width;
     }
 
     public void setStartPosX(float startPosX) {

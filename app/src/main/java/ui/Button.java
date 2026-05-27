@@ -2,14 +2,14 @@ package ui;
 
 import javafx.scene.image.Image;
 
-public class Buttons{
+public class Button{
 
     public float x, y, width, height;
     public String text;
     Runnable action;
     public Image image; 
 
-    public Buttons(float x, float y, float width, float height, String text, Runnable action){
+    public Button(float x, float y, float width, float height, String text, Runnable action){
 
         this.x = x;
         this.y = y;
@@ -20,6 +20,11 @@ public class Buttons{
     }
 
     public boolean contains(float px, float py){
+        return px >= x && px <= x+width 
+        && py > y && py <= y+height;
+    }
+
+    public boolean contains(double px, double py){
         return px >= x && px <= x+width 
         && py > y && py <= y+height;
     }
@@ -44,5 +49,9 @@ public class Buttons{
 
     public float getWidth() {
         return width;
+    }
+
+    public String getText() {
+        return text;
     }
 }
