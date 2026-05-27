@@ -79,9 +79,16 @@ public class Screen extends Pane{
         globalY = 100;
 
         for(Entity e : entities){
+            e.setStartPosX(globalX);
+            e.setStartPosY(globalY);
+
             drawEntitiy(gc, e);
+
+            e.setHeight(globalY - e.getStartPosY() );
             globalX += 100;
+            e.setWidth(globalX - e.getStartPosX());
             globalY = 100; // Zurücksetzen der Y-Position für die nächste Spalte
+
         }
 
     } 
@@ -97,8 +104,6 @@ public class Screen extends Pane{
         // Text (grob mittig; für genau mittig müsste man Textbreite messen)
         gc.setFill(Color.WHITE);
         gc.fillText(b.text, b.x + 10, b.y + b.height / 2 + 5);
-
-        System.out.println("x+ " +b.x + "y: " + b.y);
         
     }
 
@@ -108,9 +113,7 @@ public class Screen extends Pane{
         globalY += 20; // Abstand für die nächste Zeile
         gc.fillText("Armor Class: " + e.getArmorClass(), globalX, globalY);
         globalY += 20;  
-        gc.fillText("Hit Points: " + e.getCurrentHitPoints(), globalX, globalY);
-        globalY += 20;
-        gc.fillText("Current HP: " + e.getCurrentHitPoints(), globalX, globalY);
+        gc.fillText("Hit Points: " + e.getCurrentHitPoints() + "/ " + e.getCurrentHitPoints(), globalX, globalY);
         globalY += 20;
         gc.fillText("Initiative: " + e.getInitiative(), globalX, globalY);
         globalY += 20; // Extra Abstand zwischen Einheiten  

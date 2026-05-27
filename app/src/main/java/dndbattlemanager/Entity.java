@@ -8,7 +8,11 @@ public class Entity {
     private int CurrentHitPoints;
     private int Initiative;
     private boolean isPlayer;
-
+    private float txtFieldWidth;
+    private float txtFieldHeight;
+    private float startPosX;
+    private float startPosY;
+    
 
     public Entity(String name, int ArmorClass, int HitPoints, int CurrentHitPoints, int Initiative, boolean isPlayer) {
         this.name = name;
@@ -74,6 +78,38 @@ public class Entity {
 
     public int getCurrentHitPoints() {
         return CurrentHitPoints;
+    }
+
+    public void setWidth(float w){
+        this.txtFieldWidth = w;
+    }
+
+    public void setHeight(float h){
+        this.txtFieldHeight = h;
+    }
+
+    public float getTxtFieldHeight() {
+        return txtFieldHeight;
+    }
+
+    public float getTxtFieldWidth() {
+        return txtFieldWidth;
+    }
+
+    public void setStartPosX(float startPosX) {
+        this.startPosX = startPosX;
+    }
+
+    public void setStartPosY(float startPosY) {
+        this.startPosY = startPosY;
+    }
+
+    public float getStartPosX() {
+        return startPosX;
+    }
+
+    public float getStartPosY() {
+        return startPosY;
     }
 
 }
