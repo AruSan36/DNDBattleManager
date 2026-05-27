@@ -174,12 +174,12 @@ public class Screen extends Pane{
 
             for(Entity e : player){
                 if(e.contains(x, y)){
-                    handleTextFieldClicked();
+                    handleTextFieldClicked(e);
                 }
             }
             for(Entity e: enemies){
                 if(e.contains(x, y)){
-                    handleTextFieldClicked();
+                    handleTextFieldClicked(e);
                 }
 
             }
@@ -306,21 +306,56 @@ public class Screen extends Pane{
     private void sortByInitiative(){
         player.sort((a, b) -> Integer.compare(b.getInitiative(), a.getInitiative()));
         enemies.sort((a, b) -> Integer.compare(b.getInitiative(), a.getInitiative()));
-
-        System.out.println("Player:");
-        for (Entity e : player) {
-        System.out.println(e.getName() + " -> " + e.getInitiative());
-        }
-
-        System.out.println("Enemies:");
-        for (Entity e : enemies) {
-        System.out.println(e.getName() + " -> " + e.getInitiative());
-        }
     }
 
 
-    private void handleTextFieldClicked(){
-        System.out.println("Text Feld wurde geclickedt");
+    private void handleTextFieldClicked(Entity e){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.setTitle("Bearbeiten");
+        
+        ButtonType okButtonType = new ButtonType("Speichern", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(okButtonType, ButtonType.CANCEL);
+
+        TextField nameField = new TextField(e.getName());
+        TextField acField = new TextField(String.valueOf(e.getArmorClass()));
+        TextField maxHPField = new TextField(String.valueOf(e.getHitPoints()));
+        TextField currentHP = new TextField(String.valueOf(e.getCurrentHitPoints()));
+        TextField Initiative = new TextField(String.valueOf(e.getInitiative()));
+        TextField IsPlayer = new TextField(String.valueOf(e.isPlayer()));
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+
+        grid.add(new Label("Name: ") ,0,0);
+        grid.add(nameField, 1, 0);
+        grid.add(new Label("ArmorClass: ") ,0,1);
+        grid.add(acField, 1, 1);
+        grid.add(new Label("maxHp: ") ,0,2);
+        grid.add(maxHPField, 1, 2);
+        grid.add(new Label("CurrentHP: ") ,0,3);
+        grid.add(currentHP, 1, 3);
+        grid.add(new Label("Intiative: ") ,0,4);
+        grid.add(Initiative, 1, 4);
+        grid.add(new Label("isPlayer: ") ,0,5);
+        grid.add(IsPlayer, 1, 5);
+
+        dialog.getDialogPane().setContent(grid);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == okButtonType) {
+            try{
+                e.updateName(nameField.getText().trim());
+                e.updateArmorClass(Integer.parseInt(acField.getText().trim()));
+                e.updateMaxHP(Integer.parseInt(maxHPField.getText().trim()));
+                e.updateCurrentHP(Integer.parseInt(currentHP.getText().trim()));
+                e.updateInitiative(Integer.parseInt(Initiative.getText().trim()));
+                e.updateIsPlayer(Entity.convertTextToisPlayer(IsPlayer.getText().trim()));
+            } catch (NumberFormatException ex){
+                System.out.println("UngültigeEingabe");
+            }
+        }
+
     }
 
     private float getEntityTextWidth(Entity e) {

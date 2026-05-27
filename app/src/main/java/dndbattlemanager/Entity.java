@@ -37,17 +37,13 @@ public class Entity {
         }
     }
 
-/**
- * Updates the hit points of the entity. If the hit points are greater than 0, they will be added to the current hit points. If the hit points are less than 0, they will be subtracted from the current hit points.
- * @param HitPoints
- */
 
-    public void updateHitPoints(int HitPoints) {
-        if(HitPoints > 0) {
-            this.HitPoints += HitPoints;
-        } else {
-            this.HitPoints -= HitPoints;
-        }
+    public void updateMaxHP(int HP){
+        this.HitPoints = HP;
+    }
+
+    public void updateCurrentHP(int HP){
+        this.CurrentHitPoints = HP;
     }
 
     public void updateInitiative(int Initiative) {
