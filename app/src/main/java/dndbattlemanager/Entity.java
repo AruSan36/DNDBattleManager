@@ -5,14 +5,16 @@ public class Entity {
     private String name;
     private int ArmorClass;
     private int HitPoints;
+    private int CurrentHitPoints;
     private int Initiative;
     private boolean isPlayer;
 
 
-    public Entity(String name, int ArmorClass, int HitPoints, int Initiative, boolean isPlayer) {
+    public Entity(String name, int ArmorClass, int HitPoints, int CurrentHitPoints, int Initiative, boolean isPlayer) {
         this.name = name;
         this.ArmorClass = ArmorClass;
         this.HitPoints = HitPoints;
+        this.CurrentHitPoints = CurrentHitPoints;
         this.Initiative = Initiative;
         this.isPlayer = isPlayer;
     }
@@ -48,6 +50,30 @@ public class Entity {
 
     public void updateIsPlayer(boolean isPlayer) {
         this.isPlayer = isPlayer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getArmorClass() {
+        return ArmorClass;
+    }
+
+    public int getHitPoints() {
+        return HitPoints;
+    }
+
+    public int getInitiative() {
+        return Initiative;
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
+    }
+
+    public int getCurrentHitPoints() {
+        return CurrentHitPoints;
     }
 
 }

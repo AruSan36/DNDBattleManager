@@ -8,8 +8,8 @@ import ui.Screen;
 
 public class App extends Application {
 
-    public static final int WIDTH = 1980;
-    public static final int HEIGHT = 1080;
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 720;
 
     public static void main(String[] args) {
         Application.launch(args);

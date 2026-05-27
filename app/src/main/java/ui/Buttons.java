@@ -9,13 +9,13 @@ public class Buttons{
     Runnable action;
     public Image image; 
 
-    public Buttons(float x, float y, float width, float heigth, String text, Runnable action){
+    public Buttons(float x, float y, float width, float height, String text, Runnable action){
 
         this.x = x;
         this.y = y;
         this.text = text;
         this.width = width;
-        this.height= height; 
+        this.height = height; 
         this.action = action;
     }
 

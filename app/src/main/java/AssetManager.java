@@ -6,7 +6,7 @@ public class AssetManager {
     public static final HashMap<String, Image> assets = new HashMap<>();
 
     public static void loadAll(){
-        load("DNDIcon", "DND-Symbol.png");
+        load("DNDIcon", "DnD-Symbol.png");
     }
 
     private static void load(String key , String filename){
